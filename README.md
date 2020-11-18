@@ -8,7 +8,7 @@ Only incremental forecasts are scored.
 
 Within a forecast set for a particular forecast date, the incremental error numbers are all cumulative for the forecast date, meaning the Forecasts for Week 2 are the incremental forecasts for Wk1+Wk2, and the actuals are also Wk1+Wk2, etc.
 
-# Column Headers
+# Columns
 
 Here’s a description of the csv file contents, by column header:
  
@@ -42,7 +42,7 @@ pred_25 - percentage of state forecasts within 25% of actual value. The 25% thre
  
 missed_by_2x – percentage of state forecasts that missed by more than 200% of actual value, e.g., for an actual value of 1, forecast values of > 3. 
  
-covid_complete_state_point_score - total score for state point forecasts awarded by CovidComplete. This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). In addition, models that forecast fewer than 51 states' have their scores for log_difference_squared and pearson_fit_statistic adjusted. The adjustment is (x^51)^(1/(num_states-1)). Conceptually, this is Bessel's correction for an unbiased estimator, applied to the geometric mean. Scores are relative among models within a forecast date and forecast target; the highest possible score for any forecast set is defined as the highest pred(25) value of the set divided by 0.75. The score for each factor is set at 100% for the best model performance for each factor and 0% for the 25th percentile model performance for each factor. 
+covid_complete_state_point_score - total score for state point forecasts awarded by CovidComplete.  
 
 num_state_range_forecasts - number of states for which the model forecasts prediction intervals
 
@@ -52,7 +52,12 @@ ranges_gt_4x - percentage of prediction intervals in which the p(0.975) / p(0.02
  
 ranges_gt_10x - percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49 (i.e., the wide of the range rounds to greater than 10). 
 
-covid_complete_state_range_score - The state range score assigned by CovidComplete. This is the number of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%.  
+covid_complete_state_range_score - The state range score assigned by CovidComplete.  
 
+# Covid Complete Scoring
  
- 
+covid_complete_national_score - National scores are allocated as 100% for forecasts within 5% of actual, 90% for forecasts within 10% of actual, 75% for forecasts within 25% of actual, 0% for other forecasts. 
+
+covid_complete_state_point_score - This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). In addition, models that forecast fewer than 51 states' have their scores for log_difference_squared and pearson_fit_statistic adjusted. The adjustment is (x^51)^(1/(num_states-1)). Conceptually, this is Bessel's correction for an unbiased estimator, applied to the geometric mean. Scores are relative among models within a forecast date and forecast target; the highest possible score for any forecast set is defined as the highest pred(25) value of the set divided by 0.75. The score for each factor is set at 100% for the best model performance for each factor and 0% for the 25th percentile model performance for each factor. 
+
+covid_complete_state_range_score - This is the number of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%.  
