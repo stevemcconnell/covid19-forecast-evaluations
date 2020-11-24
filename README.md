@@ -1,24 +1,24 @@
 # Covid19 Forecast Evaluations
 
-Evaluations of forecasts that have been submitted in support of the CDC's Ensemble model for Covid-19 death forecasts.
+Evaluations of forecasts that have been submitted to Covid-hub in support of the CDC's Ensemble model for Covid-19 death forecasts.
 
 Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(actual/forecast) -- which mathematically is the same as ln(actual) - ln(forecast), which is why it's called log difference. 
 
 Only incremental forecasts are scored. 
 
-Within a forecast set for a particular forecast date, the incremental error numbers are all cumulative for the forecast date, meaning the Forecasts for Week 2 are the incremental forecasts for Wk1+Wk2, and the actuals are also Wk1+Wk2, etc.
+Within a forecast set for a particular forecast date, the incremental error numbers are  cumulative for the forecast date, meaning the Forecasts for Week 2 are the incremental forecasts for Wk1+Wk2, which are compared to the actuals for Wk1+Wk2, etc.
 
-"Baseline" forecasts are included. The baseline is the average deaths for the 2 weeks preceding the first date of the forecast period. (The baseline of 2 weeks preceding has been more accurate than the baseline of 1 week preceding.) 
+"Baseline" forecasts are included. The baseline is the average deaths for the 2 weeks preceding the first date of the forecast period. The baseline of 2 weeks preceding has been more accurate than the baseline of 1 week preceding.
 
 # Columns
 
 Here’s a description of the csv file contents, by column header:
  
-model – The CDC model name
+model – The CDC covid-hub model name
  
-forecast_date – The CDC forecast date for the summary files in M/D/YYYY format
+forecast_date – The CDC covid-hub forecast date for the summary files in M/D/YYYY format
  
-target - The CDC target period, i.e., 1 wk ahead inc death, 2 wk ahead inc death, etc. Only incremental targets are contained in these files. 
+target - The CDC covid-hub target period, i.e., 1 wk ahead inc death, 2 wk ahead inc death, etc. Only incremental targets are contained in these files. 
 
 target_week_end  – The CDC target week end, i.e., last day of the forecast target week in M/D/YYYY format
  
@@ -28,31 +28,31 @@ covid_complete_national_score - The national forecast score assigned by CovidCom
  
 num_state_point_forecasts – number of states forecast by the model
  
-log_difference_squared – sum of the squares of log differences for each state forecast; for values < 0 substitute values of 0.5 are used
+log_difference_squared – sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used
  
-pearson_fit_statistic – sum of (Actual–Forecast)^2/Actual; for actuals = 0, substitute values of 0.5 are used. 
+pearson_fit_statistic – sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. 
  
-mean_absolute_error – arithmetic average of the absolute errors in the state forecasts
+mean_absolute_error – arithmetic average of the absolute errors of the state point forecasts
  
-geo_mean_log_difference – geometric mean of the log differences
+geo_mean_log_difference – geometric mean of the log differences of the point state forecasts
  
-median_log_difference – median error in log differences
+median_log_difference – median error in log differences of the state point forecasts
 
-balanced_relative_error - arithmetic average of state forecast errors, with individual errors calculated as max(forecast,actual)/min(forecast,actual)-1. for values = 0, substitute values of 0.5 are used. 
+balanced_relative_error - arithmetic average of state point forecast errors, with individual errors calculated as max(forecast,actual)/min(forecast,actual)-1. for forecast and/or actual values = 0, substitute values of 0.5 are used. 
 
-pred_25 - percentage of state forecasts within 25% of actual value. The 25% threshhold for overestimates is calculated as 25% of the actual value. For underestimates it is calculated as 1/1.25 or 80% of the actual value. 
+pred_25 - percentage of state point forecasts within 25% of actual value. The 25% threshhold for overestimates is calculated as 25% of the actual value. For underestimates it is calculated as 1/1.25 or 80% of the actual value. 
  
-missed_by_2x – percentage of state forecasts that missed by more than 200% of actual value, e.g., for an actual value of 1, forecast values of > 3. 
+missed_by_2x – percentage of state forecasts that missed by more than 200% of actual value, e.g., for an actual value of 1, forecast values of > 2 or < 0.5
  
 covid_complete_state_point_score - total score for state point forecasts awarded by CovidComplete.  
 
 num_state_range_forecasts - number of states for which the model forecasts prediction intervals
 
-successful_ranges - percentage of prediction intervals that capture the actual value
+successful_ranges - percentage of prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
 
-ranges_gt_4x - percentage of prediction intervals in which the p(0.975) / p(0.025) > 4.49 (i.e., the wide of the range rounds to greater than 4). 
+ranges_gt_4x - percentage of prediction intervals in which the p(0.975) / p(0.025) > 4.49, i.e., the width of the range rounds to greater than 4. 
  
-ranges_gt_10x - percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49 (i.e., the wide of the range rounds to greater than 10). 
+ranges_gt_10x - percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49, i.e., the width of the range rounds to greater than 10. 
 
 covid_complete_state_range_score - The state range score assigned by CovidComplete.  
 
