@@ -22,39 +22,39 @@ target - The CDC covid-hub target period, i.e., 1 wk ahead inc death, 2 wk ahead
 
 target_week_end  – The CDC target week end, i.e., last day of the forecast target week in M/D/YYYY format
  
-national – error for national forecast (calculated using log difference)
+national – Error for national forecast (calculated using log difference)
  
-covid_complete_national_score - The national forecast score assigned by CovidComplete
+cc_national_score - The national forecast score assigned by CovidComplete
  
-num_state_point_forecasts – number of states forecast by the model
+num_state_point_forecasts – Number of states forecast by the model
  
-log_difference_squared – sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used
+log_difference_squared – Sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used
  
-pearson_fit_statistic – sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. 
+pearson_fit_statistic – Sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. 
  
-mean_absolute_error – arithmetic average of the absolute errors of the state point forecasts
+mean_absolute_error – Arithmetic average of the absolute errors of the state point forecasts
  
-geo_mean_log_difference – geometric mean of the log differences of the point state forecasts
+geo_mean_log_difference – Geometric mean of the log differences of the point state forecasts
  
-median_log_difference – median error in log differences of the state point forecasts
+median_log_difference – Median error in log differences of the state point forecasts
 
-balanced_relative_error - arithmetic average of state point forecast errors, with individual errors calculated as max(forecast,actual)/min(forecast,actual)-1. for forecast and/or actual values = 0, substitute values of 0.5 are used. 
+balanced_relative_error - Arithmetic average of state point forecast errors, with individual errors calculated as max(forecast,actual)/min(forecast,actual)-1. for forecast and/or actual values = 0, substitute values of 0.5 are used. 
 
-pred_25 - percentage of state point forecasts within 25% of actual value. The 25% threshhold for overestimates is calculated as 25% of the actual value. For underestimates it is calculated as 1/1.25 or 80% of the actual value. 
+pred_25 - Percentage of state point forecasts within 25% of actual value. The 25% threshhold for overestimates is calculated as 25% of the actual value. For underestimates it is calculated as 1/1.25 or 80% of the actual value. 
  
-missed_by_2x – percentage of state forecasts that missed by more than 200% of actual value, e.g., for an actual value of 1, forecast values of > 2 or < 0.5
+missed_by_2x – Percentage of state forecasts that missed by more than 200% of actual value, e.g., for an actual value of 1, forecast values of > 2 or < 0.5
  
-covid_complete_state_point_score - total score for state point forecasts awarded by CovidComplete.  
+cc_state_point_score - Total score for state point forecasts awarded by CovidComplete.  
 
-num_state_range_forecasts - number of states for which the model forecasts prediction intervals
+num_state_range_forecasts - Number of states for which the model forecasts prediction intervals
 
-successful_ranges - percentage of prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
+successful_ranges - Percentage of prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
 
-ranges_gt_4x - percentage of prediction intervals in which the p(0.975) / p(0.025) > 4.49, i.e., the width of the range rounds to greater than 4. 
+ranges_gt_4x - Percentage of prediction intervals in which the p(0.975) / p(0.025) > 4.49, i.e., the width of the range rounds to greater than 4. 
  
-ranges_gt_10x - percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49, i.e., the width of the range rounds to greater than 10. 
+ranges_gt_10x - Percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49, i.e., the width of the range rounds to greater than 10. 
 
-covid_complete_state_range_score - The state range score assigned by CovidComplete.  
+cc_state_range_score - The state range score assigned by CovidComplete.  
 
 # Covid Complete Scoring
  
@@ -63,3 +63,18 @@ covid_complete_national_score - National scores are allocated as 100% for foreca
 covid_complete_state_point_score - This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). In addition, models that forecast fewer than 51 states' have their scores for log_difference_squared and pearson_fit_statistic adjusted. The adjustment is (x^51)^(1/(num_states-1)). Conceptually, this is Bessel's correction for an unbiased estimator, applied to the geometric mean. Scores are relative among models within a forecast date and forecast target; the highest possible score for any forecast set is defined as the highest pred(25) value of the set divided by 0.75. The score for each factor is set at 100% for the best model performance for each factor and 0% for the 25th percentile model performance for each factor. 
 
 covid_complete_state_range_score - This is the number of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%.  
+
+# Covid Complete Rankings
+
+cc_national_rank - Model rank within forecast set, 1 is best; NumForecastModels is worst
+
+cc_national_percentile - Model percentile rank within forecast set, 100% is best; 0% is worst
+
+cc_state_point_rank - Model rank within forecast set, 1 is best; NumForecastModels is worst
+
+cc_state_point_percentile - Model percentile rank within forecast set, 100% is best; 0% is worst
+
+cc_state_range_rank - Model rank within forecast set, 1 is best; NumForecastModels is worst
+
+cc_state_range_percentile - Model percentile rank within forecast set, 100% is best; 0% is worst
+
