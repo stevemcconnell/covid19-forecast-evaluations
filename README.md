@@ -1,8 +1,8 @@
-# Covid19 Forecast Evaluations
+# Covid19 Death ("Incident") Forecast Evaluations
 
 Evaluations of forecasts that have been submitted to Covid-hub in support of the CDC's Ensemble model for Covid-19 death forecasts.
 
-Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(actual/forecast) -- which mathematically is the same as ln(actual) - ln(forecast), which is why it's called log difference. 
+Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(forecast/actual) -- which mathematically is the same as ln(forecast) - ln(actual), which is why it's called log difference. 
 
 Only incremental forecasts are scored. 
 
@@ -34,7 +34,7 @@ pearson_fit_statistic – Sum of [(Actual–Forecast)^2]/Actual for state point 
  
 mean_absolute_error – Arithmetic average of the absolute errors of the state point forecasts
  
-geo_mean_log_difference – Geometric mean of the log differences of the point state forecasts
+geo_mean_log_difference – Geometric mean of the absolute values of the log differences of the point state forecasts. Errors of 0 are multiplied as 1's. 
  
 median_log_difference – Median error in log differences of the state point forecasts
 
@@ -72,6 +72,6 @@ cc_state_range_percentile - Model percentile rank within forecast set, 100% is b
  
 covid_complete_national_score - National scores are allocated as 100% for forecasts within 5% of actual, 90% for forecasts within 10% of actual, 75% for forecasts within 25% of actual, 0% for other forecasts. 
 
-covid_complete_state_point_score - This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). In addition, models that forecast fewer than 51 states' have their scores for log_difference_squared and pearson_fit_statistic adjusted. The adjustment is (x^51)^(1/(num_states-1)). Conceptually, this is Bessel's correction for an unbiased estimator, applied to the geometric mean. Scores are relative among models within a forecast date and forecast target; the highest possible score for any forecast set is defined as the highest pred(25) value of the set divided by 0.75. The score for each factor is set at 100% for the best model performance for each factor and 0% for the 25th percentile model performance for each factor. 
+covid_complete_state_point_score - This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). In addition, models that forecast fewer than 51 states' have their scores for log_difference_squared and pearson_fit_statistic adjusted. The adjustment is (Score^(1/(num_states_forecast-1))^51. Conceptually, this is Bessel's correction for an unbiased estimator, applied to the geometric mean. Scores are relative among models within a forecast date and forecast target; the highest possible score for any forecast set is defined as the highest pred(25) value of the set divided by 0.75. The score for each factor is set at 100% for the best model performance for each factor and 0% for the 25th percentile model performance for each factor. 
 
-covid_complete_state_range_score - This is the number of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%.  
+covid_complete_state_range_score - This is the number of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%. Models that forecast fewer than 51 states have their score adjusted by Score*num_states_forecast/51. 
