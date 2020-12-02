@@ -34,7 +34,7 @@ pearson_fit_statistic – Sum of [(Actual–Forecast)^2]/Actual for state point 
  
 mean_absolute_error – Arithmetic average of the absolute errors of the state point forecasts
  
-geo_mean_log_difference – Geometric mean of the log differences of the point state forecasts
+geo_mean_log_difference – Geometric mean of the log differences of the point state forecasts. Errors of 0 are multiplied as 1's. 
  
 median_log_difference – Median error in log differences of the state point forecasts
 
