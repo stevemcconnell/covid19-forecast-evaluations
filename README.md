@@ -2,9 +2,9 @@
 
 # This file is currently in BETA condition. Column names and sequence are subject to change. 
 
-Evaluations of forecasts that have been submitted to Covid-hub in support of the CDC's Ensemble model for Covid-19 death forecasts.
+This site contains evaluations of forecasts that have been submitted to Covid-hub in support of the CDC's Ensemble model for Covid-19 death forecasts.
 
-Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(forecast/actual) -- which mathematically is the same as ln(forecast) - ln(actual), which is why it's called log difference. 
+Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(forecast/actual), which mathematically is the same as ln(forecast) - ln(actual), which is why it's called log difference. 
 
 Only incremental forecasts are scored. 
 
