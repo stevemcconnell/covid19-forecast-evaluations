@@ -26,20 +26,20 @@ target_week_end  | The CDC target week end, i.e., last day of the forecast targe
  
 ### National forecasts
 Field | Description
----- | ----
+:---- | :----
 national_raw_error | Simple arithmetic difference between the national forecast and the national actual value
 national_log_difference | Error for national forecast calculated using log difference
 national_percentage_error | Simple arithmetic difference between the national forecast and the national actual value
 #### *CovidComplete national forecast scoring* 
 Field | Description
----- | ----
+:---- | :----
 cc_national_score | The national forecast score assigned by CovidComplete
 cc_national_rank | The model's national forecast rank within the current set of national forecasts
 cc_national_rank_percentile | The model's national forecast rank expressed as a percentile of the ranking; 100% is best; 0% is worst
 
 ### State point forecasts
 Field | Description
----- | ----
+:---- | :----
 state_point_forecasts_num | Number of states forecast by the model
 state_log_difference_squared | Sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used
 state_pearson_fit_statistic | Sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. 
@@ -56,20 +56,20 @@ state_smape | Symmetric mean absolute percentage error (SMAPE) of state forecast
 
 #### *CovidComplete state point forecast scoring*
 Field | Description
----- | ----
+:---- | :----
 cc_state_point_score | Total score for state point forecasts awarded by CovidComplete.  
 cc_state_point_rank | The model's state point  forecast rank within the current set of state point forecasts
 cc_state_point_rank_percentile | The model's state point forecast rank expressed as a percentile of the ranking; 100% is best; 0% is worst
 
 ### State range forecasts
 Field | Description
----- | ----
+:---- | :----
 state_range_forecasts_num | Number of states for which the model forecasts prediction intervals (PIs)
 state_successful_ranges | Percentage of prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
 
 For the following fields, "width" is defined as the 0.975 PI quantile divided by the 0.025 quantile. 
 Field | Description
----- | ----
+:---- | :----
 state_range_10th_percentile_width | 10th percentile of PI widths, i.e., width of narrowest ranges
 state_range_25th_percentile_width | 25th percentile of PI widths
 state_range_50th_percentile_width | 50th percentile of PI widths, i.e., median range width
@@ -81,7 +81,7 @@ state_ranges_gt_10x | Percentage of prediction intervals in which the p(0.975) /
 
 #### *CovidComplete state range  forecast scoring*
 Field | Description
----- | ----
+:---- | :----
 cc_state_range_score | The state range score assigned by CovidComplete.  
 cc_state_range_rank | Model rank within forecast set, 1 is best; NumForecastModels is worst
 cc_state_range_rank_percentile | Model percentile rank within forecast set, 100% is best; 0% is worst
