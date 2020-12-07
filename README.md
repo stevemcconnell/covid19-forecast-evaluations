@@ -26,19 +26,21 @@ target_week_end  | The CDC target week end, i.e., last day of the forecast targe
  
 ### National forecasts
 
-national_raw_error – Simple arithmetic difference between the national forecast and the national actual value
+Field | Description
+---- | ----
+national_raw_error | Simple arithmetic difference between the national forecast and the national actual value
 
-national_log_difference – Error for national forecast calculated using log difference
+national_log_difference | Error for national forecast calculated using log difference
 
-national_percentage_error – Simple arithmetic difference between the national forecast and the national actual value
+national_percentage_error | Simple arithmetic difference between the national forecast and the national actual value
 
-#### *CovidComplete national forecast scoring*
+#### *CovidComplete national forecast scoring* |
 
-cc_national_score - The national forecast score assigned by CovidComplete
+cc_national_score | The national forecast score assigned by CovidComplete
 
-cc_national_rank - The model's national forecast rank within the current set of national forecasts
+cc_national_rank | The model's national forecast rank within the current set of national forecasts
 
-cc_national_rank_percentile - The model's national forecast rank expressed as a percentile of the ranking; 100% is best; 0% is worst
+cc_national_rank_percentile | The model's national forecast rank expressed as a percentile of the ranking; 100% is best; 0% is worst
 
 ### State point forecasts
 
