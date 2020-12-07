@@ -18,13 +18,13 @@ Here’s a description of the csv file contents, by column header:
  
 ### General info
 
-model – The CDC covid-hub model name
+model | The CDC covid-hub model name
  
-forecast_date – The CDC covid-hub forecast date for the summary files in M/D/YYYY format
+forecast_date | The CDC covid-hub forecast date for the summary files in M/D/YYYY format
  
-target - The CDC covid-hub target period, i.e., 1 wk ahead inc death, 2 wk ahead inc death, etc. Only incremental targets are contained in these files. 
+target | The CDC covid-hub target period, i.e., 1 wk ahead inc death, 2 wk ahead inc death, etc. Only incremental targets are contained in these files. 
 
-target_week_end  – The CDC target week end, i.e., last day of the forecast target week in M/D/YYYY format
+target_week_end  | The CDC target week end, i.e., last day of the forecast target week in M/D/YYYY format
  
 ### National forecasts
 
