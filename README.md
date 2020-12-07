@@ -29,7 +29,9 @@ target_week_end  – The CDC target week end, i.e., last day of the forecast tar
 ### National forecasts
 
 national_raw_error – Simple arithmetic difference between the national forecast and the national actual value
+
 national_log_difference – Error for national forecast calculated using log difference
+
 national_percentage_error – Simple arithmetic difference between the national forecast and the national actual value
 
 #### CovidComplete national forecast scoring
