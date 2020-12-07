@@ -17,6 +17,7 @@ Within a forecast set for a particular forecast date, the incremental error numb
 Here’s a description of the csv file contents, by column header:
  
 ### General info
+Field | Description
 ---- | ----
 model | The CDC covid-hub model name
 forecast_date | The CDC covid-hub forecast date for the summary files in M/D/YYYY format
