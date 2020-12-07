@@ -25,86 +25,69 @@ target | The CDC covid-hub target period, i.e., 1 wk ahead inc death, 2 wk ahead
 target_week_end  | The CDC target week end, i.e., last day of the forecast target week in M/D/YYYY format
  
 ### National forecasts
-
 Field | Description
 ---- | ----
 national_raw_error | Simple arithmetic difference between the national forecast and the national actual value
 national_log_difference | Error for national forecast calculated using log difference
 national_percentage_error | Simple arithmetic difference between the national forecast and the national actual value
-#### *CovidComplete national forecast scoring* |
+#### *CovidComplete national forecast scoring* 
+Field | Description
+---- | ----
 cc_national_score | The national forecast score assigned by CovidComplete
 cc_national_rank | The model's national forecast rank within the current set of national forecasts
 cc_national_rank_percentile | The model's national forecast rank expressed as a percentile of the ranking; 100% is best; 0% is worst
 
 ### State point forecasts
-
-state_point_forecasts_num – Number of states forecast by the model
-
-state_log_difference_squared – Sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used
-
-state_pearson_fit_statistic – Sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. 
-
-state_mean_absolute_error – Arithmetic average of the absolute errors of the state point forecasts
-
-state_geo_mean_log_difference – Geometric mean of the absolute values of the log differences of the point state forecasts. Errors of 0 are multiplied as 1's. 
-
-state_median_log_difference – Median error in log differences of the state point forecasts
-
-state_bre - Arithmetic average of state point forecast errors, with individual errors calculated as balanced relative error -- max(forecast,actual)/min(forecast,actual)-1. for forecast and/or actual values = 0, substitute values of 0.5 are used. 
-
-state_bre_signed - Same as state_bre, except that underestimates receive a negative sign
-
-state_pred_25 - Percentage of state point forecasts within 25% of actual value. The 25% threshhold for overestimates is calculated as 25% of the actual value. For underestimates it is calculated as 1/1.25 or 80% of the actual value. 
-
-state_missed_by_2x – Percentage of state forecasts that missed by more than 200% of actual value, e.g., for an actual value of 1, forecast values of > 2 or < 0.5
-
-state_rmse - Root mean squared error (RMSE) of state forecasts
-
-state_mape - Mean absolute percentage error (MAPE) of state forecasts. MAPE is calculated as the mean of abs(actual-forecast)/actual. 
-
-state_smape - Symmetric mean absolute percentage error (SMAPE) of state forecasts. SMAPE is calculated as the mean of abs(actual-forecast)/((actual+forecast)/2)
+Field | Description
+---- | ----
+state_point_forecasts_num | Number of states forecast by the model
+state_log_difference_squared | Sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used
+state_pearson_fit_statistic | Sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. 
+state_mean_absolute_error | Arithmetic average of the absolute errors of the state point forecasts
+state_geo_mean_log_difference | Geometric mean of the absolute values of the log differences of the point state forecasts. Errors of 0 are multiplied as 1's. 
+state_median_log_difference | Median error in log differences of the state point forecasts
+state_bre | Arithmetic average of state point forecast errors, with individual errors calculated as balanced relative error -- max(forecast,actual)/min(forecast,actual)-1. for forecast and/or actual values = 0, substitute values of 0.5 are used. 
+state_bre_signed | Same as state_bre, except that underestimates receive a negative sign
+state_pred_25 | Percentage of state point forecasts within 25% of actual value. The 25% threshhold for overestimates is calculated as 25% of the actual value. For underestimates it is calculated as 1/1.25 or 80% of the actual value. 
+state_missed_by_2x | Percentage of state forecasts that missed by more than 200% of actual value, e.g., for an actual value of 1, forecast values of > 2 or < 0.5
+state_rmse | Root mean squared error (RMSE) of state forecasts
+state_mape | Mean absolute percentage error (MAPE) of state forecasts. MAPE is calculated as the mean of abs(actual-forecast)/actual. 
+state_smape | Symmetric mean absolute percentage error (SMAPE) of state forecasts. SMAPE is calculated as the mean of abs(actual-forecast)/((actual+forecast)/2)
 
 #### *CovidComplete state point forecast scoring*
-
-cc_state_point_score - Total score for state point forecasts awarded by CovidComplete.  
-
-cc_state_point_rank - The model's state point  forecast rank within the current set of state point forecasts
-
-cc_state_point_rank_percentile - The model's state point forecast rank expressed as a percentile of the ranking; 100% is best; 0% is worst
+Field | Description
+---- | ----
+cc_state_point_score | Total score for state point forecasts awarded by CovidComplete.  
+cc_state_point_rank | The model's state point  forecast rank within the current set of state point forecasts
+cc_state_point_rank_percentile | The model's state point forecast rank expressed as a percentile of the ranking; 100% is best; 0% is worst
 
 ### State range forecasts
-
-state_range_forecasts_num - Number of states for which the model forecasts prediction intervals (PIs)
-
-state_successful_ranges - Percentage of prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
+Field | Description
+---- | ----
+state_range_forecasts_num | Number of states for which the model forecasts prediction intervals (PIs)
+state_successful_ranges | Percentage of prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
 
 For the following fields, "width" is defined as the 0.975 PI quantile divided by the 0.025 quantile. 
-
-state_range_10th_percentile_width - 10th percentile of PI widths, i.e., width of narrowest ranges
-
-state_range_25th_percentile_width - 25th percentile of PI widths
-
-state_range_50th_percentile_width - 50th percentile of PI widths, i.e., median range width
-
-state_range_average_width -average range width; some range widths are extreme, so median and average can be significantly different
-
-state_range_75th_percentile_width - 75th percentile of PI widths
-
-state_range_90th_percentile_width - 90th percentile of PI widths, i.e., width of widest ranges
-
-state_ranges_gt_4x - Percentage of prediction intervals in which the p(0.975) / p(0.025) > 4.49, i.e., the width of the range rounds to greater than 4. 
-
-state_ranges_gt_10x - Percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49, i.e., the width of the range rounds to greater than 10. 
+Field | Description
+---- | ----
+state_range_10th_percentile_width | 10th percentile of PI widths, i.e., width of narrowest ranges
+state_range_25th_percentile_width | 25th percentile of PI widths
+state_range_50th_percentile_width | 50th percentile of PI widths, i.e., median range width
+state_range_average_width | average range width; some range widths are extreme, so median and average can be significantly different
+state_range_75th_percentile_width | 75th percentile of PI widths
+state_range_90th_percentile_width | 90th percentile of PI widths, i.e., width of widest ranges
+state_ranges_gt_4x | Percentage of prediction intervals in which the p(0.975) / p(0.025) > 4.49, i.e., the width of the range rounds to greater than 4. 
+state_ranges_gt_10x | Percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49, i.e., the width of the range rounds to greater than 10. 
 
 #### *CovidComplete state range  forecast scoring*
-cc_state_range_score - The state range score assigned by CovidComplete.  
-
-cc_state_range_rank - Model rank within forecast set, 1 is best; NumForecastModels is worst
-
-cc_state_range_rank_percentile - Model percentile rank within forecast set, 100% is best; 0% is worst
+Field | Description
+---- | ----
+cc_state_range_score | The state range score assigned by CovidComplete.  
+cc_state_range_rank | Model rank within forecast set, 1 is best; NumForecastModels is worst
+cc_state_range_rank_percentile | Model percentile rank within forecast set, 100% is best; 0% is worst
 
 ## Covid Complete Scoring
- 
+
 **covid_complete_national_score** - National scores are allocated as 100% for forecasts within 5% of actual, 90% for forecasts within 10% of actual, 75% for forecasts within 25% of actual, 0% for other forecasts. 
 
 **covid_complete_state_point_score** - This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). In addition, models that forecast fewer than 51 states' have their scores for log_difference_squared and pearson_fit_statistic adjusted before those factors are including in the state point score. The adjustment is (Score^(1/(num_states_forecast-1))^51. Conceptually, this is Bessel's correction for an unbiased estimator, applied to the geometric mean. 
