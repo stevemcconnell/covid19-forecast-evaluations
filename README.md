@@ -1,4 +1,4 @@
-# Covid19 Death ("Incident") Forecast Evaluations
+# Covid19 Death Forecast Evaluations
 
 ## The evaluation file is currently in BETA condition. Column names and sequence are subject to change. 
 
