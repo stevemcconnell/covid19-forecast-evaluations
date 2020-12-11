@@ -2,11 +2,13 @@
 
 ## The evaluation file is currently in BETA condition. Column names and sequence are subject to change. 
 
-This site contains evaluations of forecasts that have been submitted to Covid-hub in support of the CDC's Ensemble model for Covid-19 death forecasts.
+This site contains coronavirus forecast evaluation data for forecasts that have been submitted to Covid-hub in support of the CDC's Ensemble model for Covid-19 death forecasts. Graphs and reports in more human readable form are available on the CovidComplete website at https://stevemcconnell.com/cdc-covid-19-forecast-evaluations/. 
+
+## General contents of the Covid-19 forecast evaluation file
 
 Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(forecast/actual), which mathematically is the same as ln(forecast) - ln(actual) (which is why it's called log difference). 
 
-Only incremental forecasts are included. 
+Only incremental coronavirus forecasts are included. 
 
 Within a forecast set for a particular forecast date, the incremental error numbers are  cumulative for the forecast date, meaning the Forecasts for Week 2 are the incremental forecasts for Wk1+Wk2, which are compared to the actuals for Wk1+Wk2, etc.
 
