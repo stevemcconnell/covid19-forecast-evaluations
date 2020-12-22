@@ -104,18 +104,21 @@ cc_state_range_rank_percentile_v2 | Model percentile rank within forecast set, 1
 ### covid_complete_national_score
 National scores are allocated as 100% for forecasts within 5% of actual, 90% for forecasts within 10% of actual, 75% for forecasts within 25% of actual, 0% for other forecasts. 
 
-###covid_complete_state_point_score
+### covid_complete_state_point_score
 This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). In addition, models that forecast fewer than 51 states' have their scores for log_difference_squared and pearson_fit_statistic adjusted before those factors are including in the state point score. The adjustment is (Score^(1/(num_states_forecast-1))^51. Conceptually, this is Bessel's correction for an unbiased estimator, applied to the geometric mean. 
 
 Scores are relative among models within a forecast date and forecast target; the highest possible score for any forecast set is defined as the highest pred(25) value of the set divided by 0.75. The score for each factor is set at 100% for the best model performance for each factor and 0% for the 25th percentile model performance for each factor. 
 
-###covid_complete_state_range_score
+### covid_complete_state_range_score
 This is the number of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%. Models that forecast fewer than 51 states have their score adjusted by Score * num_states_forecast/51. This score is accuracy-limited. A model cannot score higher than its capture rate. Models are penalized for poor precision (wide ranges), so a model will score lower than its capture rate if it uses wide ranges.  
 
-###covid_complete_state_range_score_v2
+### covid_complete_state_range_score_v2
 This score is also based on accuracy first, precision second. It is accuracy-limited, and the precision penalty is more fine-grained than version 1's penalty. 
+
 **state_ranges_precision_raw** is defined as 1-(upper-lower)/(upper+lower), with values of 0.5 subsituted for values of 0. For ranges in which upper=lower (i.e., point forecasts), precision will be 1.0, or 100%. Worst precision is asymptomptic at 0%. This measure of precision is affected by width of the PI range but it is intentionally not affected by the location of the actual value within the range. Similarly, it is also not affected by the degree to which a range misses an actual value, only by the width of the range itself. The possible values for precision thus range from 0-100%, regardless of scale. 
+
 **state_ranges_precision_95pi_adjusted** Calibration has determined a 95% capture rate with raw precision higher than about 47.9% is not possible, so the adjusted precision score is the raw precision score adjusted for the precision needed to attain the intended level of 95% PI coverage. The adjusted precision score is thus raw precision score / 0.479, where 0.479 is a constant that is derived through calibration. For practical purposes, this constant can be estimated using the formula 1 - IGR + IGR * alpha^IGR, where IGR is the inverse golden ratio and alpha is 1 - prediction interval. The adjusted precision score is limited to a max of 100%. 
+
 **covid_complete_state_range_score_v2** is calculated as the PI capture rate / 0.95, limited to a max of 1.0 (i.e., 100% credit for capture of 95%, and no extra credit for capture rates higher than 95%); minus (1-adjusted precision)^2. This penalizes precision close to 100% minimally and penalizes lower precision disproportionately. 
 * A model with 95% capture rate and an adjusted precision score of 100% will score 100%. 
 * A model with 95% capture rate and an adjusted precision score of 75% will score 94%. 
