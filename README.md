@@ -123,5 +123,7 @@ This score is also based on accuracy first, precision second. It is accuracy-lim
 * A model with 95% capture rate and an adjusted precision score of 100% will score 100%. 
 * A model with 95% capture rate and an adjusted precision score of 75% will score 94%. 
 * A model with 95% capture rate and an adjusted precision score of 50% will score 75%. I.e., its score will be equal to a model with a 71% capture rate (which is divided by 0.95) and a 100% precision score. 
+* A model with a 71% capture rate and an adjusted precision score of 50% will score 54%. 
 * A model with a 95% capture rate and an adjusted precision score of 0% (i.e., a model that guesses zero to 1 million for everything) will score 0%. 
-This scoring approach favors accuracy first, precision second, and does not allow models with high precision but moderate accuracy to outperform models with high accuracy and only moderate precision.  
+
+This scoring approach favors accuracy first, precision second, and does not allow models with high precision but moderate accuracy to outperform models with high accuracy and only moderate precision.
