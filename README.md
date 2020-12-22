@@ -1,8 +1,8 @@
 # Covid19 Death Forecast Evaluations
 
-## The evaluation file is currently in BETA condition. Column names and sequence are subject to change. 
-
 This site contains coronavirus forecast evaluation data for forecasts that have been submitted to Covid-hub in support of the CDC's Ensemble model for Covid-19 death forecasts. Graphs and reports in more human readable form are available on the CovidComplete website at https://stevemcconnell.com/cdc-covid-19-forecast-evaluations/. 
+
+Column names are stable and will not change. Column positions are subject to change. 
 
 ## General contents of the Covid-19 forecast evaluation file
 
