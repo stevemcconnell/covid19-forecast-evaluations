@@ -110,7 +110,9 @@ This is a weighted score allocated as follows: log_difference_squared (1), geo_m
 Scores are relative among models within a forecast date and forecast target; the highest possible score for any forecast set is defined as the highest pred(25) value of the set divided by 0.75. The score for each factor is set at 100% for the best model performance for each factor and 0% for the 25th percentile model performance for each factor. 
 
 ### covid_complete_state_range_score
-This is the number of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%. Models that forecast fewer than 51 states have their score adjusted by Score * num_states_forecast/51. This score is accuracy-limited. A model cannot score higher than its capture rate. Models are penalized for poor precision (wide ranges), so a model will score lower than its capture rate if it uses wide ranges.  
+This score is accuracy-limited. A model cannot score higher than its capture rate. Models are penalized for poor precision (wide ranges), so a model will score lower than its capture rate if it uses wide ranges. 
+
+Score is calculated as the percentage of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%. Models that forecast fewer than 51 states have their score adjusted by Score * num_states_forecast/51.  
 
 ### covid_complete_state_range_score_v2
 This score is also based on accuracy first, precision second. It is accuracy-limited, and the precision penalty is more fine-grained than version 1's penalty. 
@@ -121,8 +123,9 @@ This score is also based on accuracy first, precision second. It is accuracy-lim
 
 **covid_complete_state_range_score_v2** is calculated as the PI capture rate / 0.95, limited to a max of 1.0 (i.e., 100% credit for capture of 95%, and no extra credit for capture rates higher than 95%); minus (1-adjusted precision)^2. This penalizes precision close to 100% minimally and penalizes lower precision disproportionately. 
 * A model with 95% capture rate and an adjusted precision score of 100% will score 100%. 
+* A model with 100% capture rate and an adjusted precision score of 100% will score 100%. 
 * A model with 95% capture rate and an adjusted precision score of 75% will score 94%. 
-* A model with 95% capture rate and an adjusted precision score of 50% will score 75%. I.e., its score will be equal to a model with a 71% capture rate (which is divided by 0.95) and a 100% precision score. 
+* A model with 95% capture rate and an adjusted precision score of 50% will score 75%. This model's score will be equal to a model with a 71% capture rate (which receives a base score of 75% (0.71/0.95=0.75)) and a 100% precision score. 
 * A model with a 71% capture rate and an adjusted precision score of 50% will score 54%. 
 * A model with a 95% capture rate and an adjusted precision score of 0% (i.e., a model that guesses zero to 1 million for everything) will score 0%. 
 
