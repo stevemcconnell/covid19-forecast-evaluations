@@ -14,7 +14,7 @@ Only incremental coronavirus forecasts are included.
 
 Within a forecast set for a particular forecast date, the incremental error numbers are  cumulative for the forecast date, meaning the Forecasts for Week 2 are the incremental forecasts for Wk1+Wk2, which are compared to the actuals for Wk1+Wk2, etc.
 
-"Baseline" forecasts are included. The baseline is the average deaths for the 2 weeks preceding the first date of the forecast period. (The baseline of 2 weeks preceding has been more accurate than the baseline of 1 week preceding.) There is no baseline for prediction intervals at this time. 
+"Baseline" forecasts are included. The **baseline point forecast** is the average deaths for the 2 weeks preceding the first date of the forecast period. (The baseline of 2 weeks preceding has been more accurate than the baseline of 1 week preceding.) The **baseline prediction interval** forecast is the range from 50% of the baseline point forecast to 200% of the baseline point forecast. 
 
 ## Columns
 
