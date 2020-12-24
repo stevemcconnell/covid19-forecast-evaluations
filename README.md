@@ -33,7 +33,7 @@ Field | Description
 :---- | :----
 national_raw_error | Simple arithmetic difference between the national forecast and the national actual value
 national_log_difference | Error for national forecast calculated using log difference
-national_percentage_error | Simple arithmetic difference between the national forecast and the national actual value
+national_percentage_error | (forecast - actual) / actual
 national_bre | Balanced relative error of the national forecast
 
 #### *CovidComplete national forecast scoring* 
