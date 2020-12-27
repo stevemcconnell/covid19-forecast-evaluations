@@ -31,7 +31,7 @@ target_week_end  | The CDC target week end, i.e., last day of the forecast targe
 ### National forecasts
 Field | Description
 :---- | :----
-national_raw_error | Simple arithmetic difference between the national forecast and the national actual value
+national_raw_error | Simple arithmetic difference between the national forecast and the national actual value. Because actual values vary significantly over time, care must be taken to align time periods when comparing different models on this metric.
 national_log_difference | Error for national forecast calculated using log difference
 national_percentage_error | (forecast - actual) / actual
 national_bre | Balanced relative error of the national forecast
@@ -47,16 +47,16 @@ cc_national_rank_percentile | The model's national forecast rank expressed as a 
 Field | Description
 :---- | :----
 state_point_forecasts_num | Number of states forecast by the model
-state_log_difference_squared | Sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used
-state_pearson_fit_statistic | Sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. 
-state_mean_absolute_error | Arithmetic average of the absolute errors of the state point forecasts
-state_geo_mean_log_difference | Geometric mean of the absolute values of the log differences of the point state forecasts. Errors of 0 are multiplied as 1's. 
-state_median_log_difference | Median error in log differences of the state point forecasts
-state_bre | Arithmetic average of state point forecast errors, with individual errors calculated as balanced relative error. 
+state_log_difference_squared | Sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used. Because this metric depends on the magnitudes of the actual values, care should be taken when comparing values across time periods in which the values of the actuals vary. 
+state_pearson_fit_statistic | Sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. Because this metric depends on the magnitudes of the actual values, care should be taken when comparing values across time periods in which the values of the actuals vary. 
+state_mean_absolute_error | Arithmetic average of the absolute errors of the state point forecasts. This metric is an indication of the magnitude of error in forecasts. However, because this metric depends on the magnitudes of the actual values, care should be taken when comparing values across time periods in which the values of the actuals vary. 
+state_geo_mean_log_difference | Geometric mean of the absolute values of the log differences of the point state forecasts. Errors of 0 are multiplied as 1's. This metric indicates the magnitude of forecast error.  
+state_median_log_difference | Median error in log differences of the state point forecasts. This metric indicates bias in forecasts. 
+state_bre | Arithmetic average of state point forecast errors, with individual errors calculated as balanced relative error. This metric indicates the magnitude of forecast error. 
 state_bre_signed | Same as state_bre, except that underestimates receive a negative sign
 state_pred_25 | Percentage of state point forecasts within 25% of actual value. The 25% threshhold for overestimates is calculated as 25% of the actual value. For underestimates it is calculated as 1/1.25 or 80% of the actual value. 
 state_missed_by_2x | Percentage of state forecasts that missed by more than 200% of actual value, e.g., for an actual value of 1, forecast values of > 2 or < 0.5
-state_rmse | Root mean squared error (RMSE) of state forecasts
+state_rmse | Root mean squared error (RMSE) of state forecasts. This metric indicates the magnitude of forecast error. Because this metric depends on the magnitudes of the actual values, care should be taken when comparing values across time periods in which the values of the actuals vary. 
 state_mape | Mean absolute percentage error (MAPE) of state forecasts. MAPE is calculated as the mean of abs(actual-forecast)/actual. 
 state_smape | Symmetric mean absolute percentage error (SMAPE) of state forecasts. SMAPE is calculated as the mean of abs(actual-forecast)/((actual+forecast)/2)
 
@@ -84,9 +84,9 @@ state_range_75th_percentile_width | 75th percentile of PI widths
 state_range_90th_percentile_width | 90th percentile of PI widths, i.e., width of widest ranges
 state_ranges_gt_4x | Percentage of prediction intervals in which the p(0.975) / p(0.025) > 4.49, i.e., the width of the range rounds to greater than 4. 
 state_ranges_gt_10x | Percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49, i.e., the width of the range rounds to greater than 10. 
-state_ranges_interval_score | Interval score for the 95% prediction intervals ala Gneiting and Raftery. This is the sum of all the state interval scores. Note, this is not the weighted interval score, just the interval score for the 95% PI. 
+state_ranges_interval_score | Interval score for the 95% prediction intervals ala Gneiting and Raftery. This is the sum of the individual state interval scores. Note, this is not the weighted interval score, but the interval score for the 95% PI. 
 state_ranges_interval_normalized | Average interval score for the 95% prediction intervals in which the interval score for each state is divided by the actual for each state.  
-state_ranges_precision_raw | Average precision score for each 95% prediction interval calculated as (upper-lower) / (upper+lower). For forecast and/or actual values = 0, substitute values of 0.5 are used. See notes on CovidComplete range score v. 2 below. 
+state_ranges_precision_raw | Average precision score for each 95% prediction interval. Precision is calculated as (upper-lower) / (upper+lower). For forecast and/or actual values = 0, substitute values of 0.5 are used. See notes on CovidComplete range score v. 2 below. 
 state_ranges_precision_95pi_adjusted | Average precision score adjusted for the precision that's possible withi 95% PIs. 
 
 #### *CovidComplete state range  forecast scoring*
