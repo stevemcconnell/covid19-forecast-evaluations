@@ -4,6 +4,8 @@ This site contains coronavirus forecast evaluation data for forecasts that have 
 
 Column names are stable and will not change. Column positions are subject to change. 
 
+The Excel spreadsheets are quite powerful in terms of allowing models to be sorted and filtered by the performance metrics described below. 
+
 ## General contents of the Covid-19 forecast evaluation file
 
 Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(forecast/actual), which mathematically is the same as ln(forecast) - ln(actual) (which is why it's called log difference). 
