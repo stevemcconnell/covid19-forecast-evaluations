@@ -86,7 +86,9 @@ state_range_75th_percentile_width | 75th percentile of PI widths
 state_range_90th_percentile_width | 90th percentile of PI widths, i.e., width of widest ranges
 state_ranges_gt_4x | Percentage of prediction intervals in which the p(0.975) / p(0.025) > 4.49, i.e., the width of the range rounds to greater than 4. 
 state_ranges_gt_10x | Percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49, i.e., the width of the range rounds to greater than 10. 
-state_ranges_interval_score | Interval score for the 95% prediction intervals ala Gneiting and Raftery. This is the sum of the individual state interval scores. Note, this is not the weighted interval score, but the interval score for the 95% PI. 
+state_ranges_95PI_score | Interval score for the 95% prediction intervals ala Gneiting and Raftery. This is the sum of the individual state interval scores. Note, this is not the weighted interval score, but the interval score for the 95% PI. 
+state_ranges_50PI_score | Interval score for the 50% prediction intervals ala Gneiting and Raftery. This is the sum of the individual state interval scores. Note, this is not the weighted interval score, but the interval score for the 50% PI. 
+state_ranges_AbbreviatedWis| Abbreviated Weighted Interval Score (WIS) based on a subset of the quantiles provided by the forecast modles. The subset WIS is based on the point forecast (0.5 quantile), 50% PI, and 95% PI. This is the sum of the individual state abbreviated WIS scores. 
 state_ranges_interval_normalized | Average interval score for the 95% prediction intervals in which the interval score for each state is divided by the actual for each state.  
 state_ranges_precision_raw | Average precision score for each 95% prediction interval. Precision is calculated as (upper-lower) / (upper+lower). For forecast and/or actual values = 0, substitute values of 0.5 are used. See notes on CovidComplete range score v. 2 below. 
 state_ranges_precision_95pi_adjusted | Average precision score adjusted for the precision that's possible withi 95% PIs. 
