@@ -73,7 +73,8 @@ cc_state_point_rank_percentile | The model's state point forecast rank expressed
 Field | Description
 :---- | :----
 state_range_forecasts_num | Number of states for which the model forecasts prediction intervals (PIs)
-state_successful_ranges | Percentage of prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
+state_range_capture_rate_95PI | Percentage of 95% prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
+state_range_capture_rate_50PI | Percentage of 50% prediction intervals that capture the actual value in the 0.25 to 0.75 quantile range
 
 For the following fields, "width" is defined as the 0.975 PI quantile divided by the 0.025 quantile. 
 Field | Description
