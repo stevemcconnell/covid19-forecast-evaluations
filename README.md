@@ -75,12 +75,7 @@ Field | Description
 state_range_forecasts_num | Number of states for which the model forecasts prediction intervals (PIs)
 state_range_capture_rate_95PI | Percentage of 95% prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
 state_range_capture_rate_50PI | Percentage of 50% prediction intervals that capture the actual value in the 0.25 to 0.75 quantile range
-
-###
-For the following fields, "width" is defined as the 0.975 PI quantile divided by the 0.025 quantile.
-Field | Description
-:---- | :----
-state_range_10th_percentile_width | 10th percentile of PI widths, i.e., width of narrowest ranges
+state_range_10th_percentile_width | 10th percentile of PI widths, i.e., width of narrowest ranges. In this field and the following fields, "width" is defined as the 0.975 PI quantile divided by the 0.025 quantile.
 state_range_25th_percentile_width | 25th percentile of PI widths
 state_range_50th_percentile_width | 50th percentile of PI widths, i.e., median range width
 state_range_average_width | average range width; some range widths are extreme, so median and average can be significantly different
