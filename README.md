@@ -4,19 +4,19 @@ This site contains coronavirus forecast evaluation data for forecasts that have 
 
 Column names are stable and will not change. Column positions are subject to change. 
 
-The Excel spreadsheets are quite powerful in terms of allowing models to be sorted and filtered by the performance metrics described below. 
+The Excel spreadsheets are  powerful in terms of allowing models to be sorted and filtered by the performance metrics described below. 
 
 ## General contents of the Covid-19 forecast evaluation file
 
-Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(forecast/actual), which mathematically is the same as ln(forecast) - ln(actual) (which is why it's called log difference). 
+Unless otherwise noted, all "errors" in the files refer to "log difference", which is calculated as ln(forecast/actual), which mathematically is the same as ln(forecast) - ln(actual), which is why it's called log difference. For forecast and/or actual values = 0, substitute values of 0.5 are used. 
 
 Some errors are presented as balanced relative error (BRE), which is calculated as max(forecast,actual)/min(forecast,actual)-1. For forecast and/or actual values = 0, substitute values of 0.5 are used. 
 
 Only incremental coronavirus forecasts are included. 
 
-Within a forecast set for a particular forecast date, the incremental error numbers are  cumulative for the forecast date, meaning the Forecasts for Week 2 are the incremental forecasts for Wk1+Wk2, which are compared to the actuals for Wk1+Wk2, etc.
+Within a forecast set for a particular forecast date, the incremental error numbers are  cumulative from the forecast date, meaning the Forecasts for Week 2 are the incremental forecasts for Wk1+Wk2, which are compared to the actuals for Wk1+Wk2, etc.
 
-"Baseline" forecasts are included. The **baseline point forecast** is the average deaths for the 2 weeks preceding the first date of the forecast period. (The baseline of 2 weeks preceding has been more accurate than the baseline of 1 week preceding.) The **baseline prediction interval** forecast is the range from 50% of the baseline point forecast to 200% of the baseline point forecast. 
+"Baseline" forecasts are included. The **baseline point forecast** is the average deaths for the 2 weeks preceding the first date of the forecast period. The baseline of 2 weeks preceding has been more accurate than the baseline of 1 week preceding. The **baseline prediction interval** forecast is the range from 50% of the baseline point forecast to 200% of the baseline point forecast. 
 
 ## Columns
 
@@ -33,7 +33,7 @@ target_week_end  | The CDC target week end, i.e., last day of the forecast targe
 ### National forecasts
 Field | Description
 :---- | :----
-national_raw_error | Simple arithmetic difference between the national forecast and the national actual value. Because actual values vary significantly over time, care must be taken to align time periods when comparing different models on this metric.
+national_raw_error | Simple arithmetic difference between the national forecast and the national actual value. Because actual values vary significantly over time, evaluating models that provided forecasts over different time periods can be misleading. Evaluations will be most accurate if time periods are aligned when evaluating different models on this metric.
 national_log_difference | Error for national forecast calculated using log difference
 national_percentage_error | (forecast - actual) / actual
 national_bre | Balanced relative error of the national forecast
@@ -49,7 +49,7 @@ cc_national_rank_percentile | The model's national forecast rank expressed as a 
 Field | Description
 :---- | :----
 state_point_forecasts_num | Number of states forecast by the model
-state_log_difference_squared | Sum of the squares of log differences for each state point forecast; for forecast values and/or actual values < 0, substitute values of 0.5 are used. Because this metric depends on the magnitudes of the actual values, care should be taken when comparing values across time periods in which the values of the actuals vary. 
+state_log_difference_squared | Sum of the squares of log differences for each state point forecast; for forecast values and/or actual values <= 0, substitute values of 0.5 are used. Because this metric depends on the magnitudes of the actual values, care should be taken when comparing values across time periods in which the values of the actuals vary. 
 state_pearson_fit_statistic | Sum of [(Actual–Forecast)^2]/Actual for state point forecasts; for actuals = 0, substitute values of 0.5 are used. Because this metric depends on the magnitudes of the actual values, care should be taken when comparing values across time periods in which the values of the actuals vary. 
 state_mean_absolute_error | Arithmetic average of the absolute errors of the state point forecasts. This metric is an indication of the magnitude of error in forecasts. However, because this metric depends on the magnitudes of the actual values, care should be taken when comparing values across time periods in which the values of the actuals vary. 
 state_geo_mean_log_difference | Geometric mean of the absolute values of the log differences of the point state forecasts. Errors of 0 are multiplied as 1's. This metric indicates the magnitude of forecast error.  
@@ -75,11 +75,7 @@ Field | Description
 state_range_forecasts_num | Number of states for which the model forecasts prediction intervals (PIs)
 state_range_capture_rate_95PI | Percentage of 95% prediction intervals that capture the actual value in the 0.025 to 0.975 quantile range
 state_range_capture_rate_50PI | Percentage of 50% prediction intervals that capture the actual value in the 0.25 to 0.75 quantile range
-
-For the following fields, "width" is defined as the 0.975 PI quantile divided by the 0.025 quantile. 
-Field | Description
-:---- | :----
-state_range_10th_percentile_width | 10th percentile of PI widths, i.e., width of narrowest ranges
+state_range_10th_percentile_width | 10th percentile of PI widths, i.e., width of narrowest ranges. In this field and the following fields, "width" is defined as the 0.975 PI quantile divided by the 0.025 quantile.
 state_range_25th_percentile_width | 25th percentile of PI widths
 state_range_50th_percentile_width | 50th percentile of PI widths, i.e., median range width
 state_range_average_width | average range width; some range widths are extreme, so median and average can be significantly different
@@ -89,7 +85,10 @@ state_ranges_gt_4x | Percentage of prediction intervals in which the p(0.975) / 
 state_ranges_gt_10x | Percentage of prediction intervals in which the p(0.975) / p(0.025) > 10.49, i.e., the width of the range rounds to greater than 10. 
 state_ranges_95PI_score | Interval score for the 95% prediction intervals ala Gneiting and Raftery. This is the sum of the individual state interval scores. Note, this is not the weighted interval score, but the interval score for the 95% PI. 
 state_ranges_50PI_score | Interval score for the 50% prediction intervals ala Gneiting and Raftery. This is the sum of the individual state interval scores. Note, this is not the weighted interval score, but the interval score for the 50% PI. 
-state_ranges_AbbreviatedWis| Abbreviated Weighted Interval Score (WIS) based on a subset of the quantiles provided by the forecast modles. The subset WIS is based on the point forecast (0.5 quantile), 50% PI, and 95% PI. This is the sum of the individual state abbreviated WIS scores. 
+state_ranges_synthetic_wis | Synthetic WIS (WIS) based on a subset of the quantiles provided by the forecast models. The subset WIS is based on the point forecast (0.5 quantile), 50% PI, and 95% PI. Synthetic WIS is within 2% of WIS calculated from the full set of quantiles. This is the sum of the individual state synthetic WIS scores. 
+state_ranges_synthetic_wis_sharpness | Portion of the WIS due to the sharpness (precision) score. 
+state_ranges_synthetic_wis_penalty | Portion of the WIS due to the penalty score. 
+state_ranges_synthetic_wis_rank_percentile | The model's rank compared to other models that provided forecasts for that forecast period and target. 
 state_ranges_interval_normalized | Average interval score for the 95% prediction intervals in which the interval score for each state is divided by the actual for each state.  
 state_ranges_precision_raw | Average precision score for each 95% prediction interval. Precision is calculated as (upper-lower) / (upper+lower). For forecast and/or actual values = 0, substitute values of 0.5 are used. See notes on CovidComplete range score v. 2 below. 
 state_ranges_precision_95pi_adjusted | Average precision score adjusted for the precision that's possible withi 95% PIs. 
@@ -110,19 +109,16 @@ cc_state_range_rank_percentile_v2 | Model percentile rank within forecast set, 1
 National scores are allocated as 100% for forecasts within 5% of actual, 90% for forecasts within 10% of actual, 75% for forecasts within 25% of actual, 0% for other forecasts. 
 
 ### covid_complete_state_point_score
-This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). In addition, models that forecast fewer than 51 states' have their scores for log_difference_squared and pearson_fit_statistic adjusted before those factors are including in the state point score. The adjustment is (Score^(1/(num_states_forecast-1))^51. Conceptually, this is Bessel's correction for an unbiased estimator, applied to the geometric mean. 
+This is a weighted score allocated as follows: log_difference_squared (1), geo_mean_log_difference (1), pearson_fit_statistic (0.75), median_log_difference (0.75), pred_25 (0.5), missed_by_2x (0.5), mean_absolute_error (0.25). The measures of log_difference_squared and pearson_fit_statistic are affected by the number of states forecast, so models that forecast fewer than 51 states might appear to be more accurate compared to other models than they are.  
 
 Scores are relative among models within a forecast date and forecast target; the highest possible score for any forecast set is defined as the highest pred(25) value of the set divided by 0.75. The score for each factor is set at 100% for the best model performance for each factor and 0% for the 25th percentile model performance for each factor. 
 
-### covid_complete_state_range_score
-This score is accuracy-limited. A model cannot score higher than its capture rate. Models are penalized for poor precision (wide ranges), so a model will score lower than its capture rate if it uses wide ranges. 
-
-Score is calculated as the percentage of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%. Models that forecast fewer than 51 states have their score adjusted by Score * num_states_forecast/51.  
+The total possible score is limited by the best pred(25) score in each forecast set, using the formula MaxPossibleScore = BestPred25Score / 0.75, with maximum limited to 100%. The preliminary score for each model is multiplied by MaxPossibleScore. If any model scores 75% or better on pred(25), then the maximum score possible is 100%. If the best pred(25) score within a given forecast set is lower than 75%, then the maximum possible score will be less than 100%. 
 
 ### covid_complete_state_range_score_v2
-This score is also based on accuracy first, precision second. It is accuracy-limited, and the precision penalty is more fine-grained than version 1's penalty. 
+This score is  based on accuracy first, precision second. It is accuracy-limited. Its precision penalty is more fine-grained than version 1's penalty. 
 
-**state_ranges_precision_raw** is defined as 1-(upper-lower)/(upper+lower), with values of 0.5 subsituted for values of 0. For ranges in which upper=lower (i.e., point forecasts), precision will be 1.0, or 100%. Worst precision is asymptotic at 0%. This measure of precision is affected by width of the PI range but it is intentionally not affected by the location of the actual value within the range. Similarly, it is also not affected by the degree to which a range misses an actual value, only by the width of the range itself. The possible values for precision thus range from 0-100%, regardless of scale. 
+**state_ranges_precision_raw** is defined as 1-(upper-lower)/(upper+lower), with values of 0.5 subsituted for values of 0. For ranges in which upper=lower (i.e., point forecasts), precision will be 1.0, or 100%. Worst precision is asymptotic at 0.0%. This measure of precision is affected by width of the PI range but, by design, it is not affected by the location of the actual value within the range. Similarly, it is also not affected by the degree to which a range misses an actual value, only by the width of the range itself. The possible values for precision thus range from 0-100%, regardless of scale. 
 
 **state_ranges_precision_95pi_adjusted** Calibration has determined a 95% capture rate with raw precision higher than about 48% is not possible, so the adjusted precision score is the raw precision score adjusted for the precision needed to attain the intended level of 95% PI coverage. The adjusted precision score is thus raw precision score / 0.479, where 0.479 is a constant that is derived through calibration. The adjusted precision score is limited to a max of 100%. 
 
@@ -135,3 +131,9 @@ This score is also based on accuracy first, precision second. It is accuracy-lim
 * A model with a 95% capture rate and an adjusted precision score of 0% (i.e., a model that guesses zero to 1 million for everything) will score 0%. 
 
 This scoring approach favors accuracy first, precision second, and does not allow models with high precision but moderate accuracy to outperform models with high accuracy and only moderate precision.
+
+### covid_complete_state_range_score (deprecated)
+This score is accuracy-limited. A model cannot score higher than its capture rate. Models are penalized for poor precision (wide ranges), so a model will score lower than its capture rate if it uses wide ranges. 
+
+Score is calculated as the percentage of ranges that are <=4x wide that successfully include the actual value, divided by 0.95. A model whose prediction intervals include 95% of actual values with ranges <=4x will score 100%. Models that forecast fewer than 51 states have their score adjusted by Score * num_states_forecast/51.  
+
