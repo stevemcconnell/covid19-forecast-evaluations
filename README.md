@@ -20,6 +20,10 @@ The **baseline prediction interval** forecast is the range from 50% of the basel
 
 "Dynamic baseline forecasts" are also included. These forecasts are named "Baseline" and appended with the abbreviated name of the evaluation data set, such as "Baseline-CDC". The dynamic baseline forecasts are constructive from  data that is currently available. Thus Baseline and Baseline-JHU-U will not always match, because of updates that have been made to the JHU CSSE data between the time the original baseline for a forecast period was constructed and the present. 
 
+## Stability of the Evaluations
+
+Stability of the evaluations depends on stability of the underlying evaluation data, e.g., data from JHU, CDC, and NYT. Evaluation data (and therefore the evaluations) for forecasts completed more than two months earlier than the commit date can be considered FINAL, i.e., future changes arising from updates to the evaluation data should be minimal. Evaluation data and evaluations completed from 1-2 months prior to the commit date should be considered to be PRELIMINARY, i.e., some future changes should be expected. Evaluation data and evaluations for forecasts completed less than 1 month prior to the commit date should be considered to be in DRAFT status, i.e., future changes in the underlying evaluation data and therefore in the evaluations should be expected to be fairly numerous. 
+
 ## Columns
 
 Here’s a description of the csv file contents, by column header:
